@@ -6,6 +6,7 @@ import 'package:rhmobile/pages/configura_plantao.dart';
 import 'package:rhmobile/pages/contracheque.dart';
 import 'package:rhmobile/pages/edicao_endereco_page.dart';
 import 'package:rhmobile/pages/meu_patrimonio.dart';
+import 'package:rhmobile/pages/plano_de_ferias.dart';
 import 'package:rhmobile/utils/my_colors.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -94,6 +95,7 @@ class _MyAppState extends State<MyApp> {
           AppRoutes.AUTH_OR_HOME: (context) => const AuthOrHome(),
           AppRoutes.PAGE_MILITAR: (context) => const PageMilitar(),
           AppRoutes.CONFIGURACOES: (context) => const Configuracoes(),
+          AppRoutes.PLANODEFERIAS: (context) => const PlanoDeFerias(),
           AppRoutes.HOME_PAGE: (context) => HomePage(),
           AppRoutes.PLANTAO: (context) => PlantaoPage(),
           AppRoutes.NOTIFICATIONS_PAGE: (context) => NotificationsPage(),

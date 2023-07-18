@@ -20,7 +20,7 @@ class GridMenu extends StatelessWidget {
     Choice(title: 'Meu Plantao', icon: Icons.car_crash, id: 2),
     Choice(title: 'Meu Patrimonio', icon: Icons.attach_money, id: 3),
     Choice(title: 'Contracheques', icon: Icons.request_quote, id: 4),
-    Choice(title: 'Configuracoes', icon: Icons.settings, id: 5),
+    Choice(title: 'Plano de Férias', icon: Icons.surfing, id: 5),
     Choice(title: 'Sair', icon: Icons.logout_rounded, id: 6),
   ];
 
@@ -72,7 +72,7 @@ class SelectCard extends StatelessWidget {
               .pushReplacementNamed(AppRoutes.CONTRACHEQUE_PAGE);
         }
         if (choice.id == 5) {
-          Navigator.of(context).pushReplacementNamed(AppRoutes.CONFIGURACOES);
+          Navigator.of(context).pushReplacementNamed(AppRoutes.PLANODEFERIAS);
         }
         if (choice.id == 6) {
           auth.logout();
