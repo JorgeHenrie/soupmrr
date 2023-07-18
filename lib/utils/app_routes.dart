@@ -4,6 +4,7 @@ class AppRoutes {
   static const AUTH_OR_HOME = '/';
   static const PAGE_MILITAR = '/page-militar';
   static const CONFIGURACOES = '/configuracoes';
+  static const PLANODEFERIAS = '/planodeferias';
   static const PLANTAO = '/plantao';
   static const DECLARACOES_IRPF_PAGE = '/meu-patrimonio-page';
   static const NOTIFICATIONS_PAGE = '/notifications-page';
