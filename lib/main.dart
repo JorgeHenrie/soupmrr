@@ -1,25 +1,27 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:provider/provider.dart';
 import 'package:rhmobile/models/militar.dart';
 import 'package:rhmobile/pages/ajuda_page.dart';
-import 'package:rhmobile/pages/configura_plantao.dart';
-import 'package:rhmobile/pages/contracheque.dart';
-import 'package:rhmobile/pages/edicao_endereco_page.dart';
-import 'package:rhmobile/pages/meu_patrimonio.dart';
-import 'package:rhmobile/pages/plano_de_ferias.dart';
-import 'package:rhmobile/utils/my_colors.dart';
-import 'firebase_options.dart';
-import 'package:provider/provider.dart';
 import 'package:rhmobile/pages/auth_or_home.dart';
 import 'package:rhmobile/pages/auth_page.dart';
+import 'package:rhmobile/pages/configura_plantao.dart';
 import 'package:rhmobile/pages/configuracoes.dart';
+import 'package:rhmobile/pages/contracheque.dart';
+import 'package:rhmobile/pages/edicao_endereco_page.dart';
 import 'package:rhmobile/pages/home_page.dart';
+import 'package:rhmobile/pages/meu_patrimonio.dart';
 import 'package:rhmobile/pages/notifications_page.dart';
+import 'package:rhmobile/pages/page_ferias_home.dart';
+import 'package:rhmobile/pages/page_ferias_programar.dart';
 import 'package:rhmobile/pages/page_militar.dart';
 import 'package:rhmobile/pages/plantao_page.dart';
+import 'package:rhmobile/utils/my_colors.dart';
+
+import 'firebase_options.dart';
 import 'models/auth_model.dart';
 import 'utils/app_routes.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -95,7 +97,8 @@ class _MyAppState extends State<MyApp> {
           AppRoutes.AUTH_OR_HOME: (context) => const AuthOrHome(),
           AppRoutes.PAGE_MILITAR: (context) => const PageMilitar(),
           AppRoutes.CONFIGURACOES: (context) => const Configuracoes(),
-          AppRoutes.PLANODEFERIAS: (context) => const PlanoDeFerias(),
+          AppRoutes.FERIASHOME: (context) => const feriasHome(),
+          AppRoutes.PROGRAMAR_FERIAS: (context) => const ProgramarFerias(),
           AppRoutes.HOME_PAGE: (context) => HomePage(),
           AppRoutes.PLANTAO: (context) => PlantaoPage(),
           AppRoutes.NOTIFICATIONS_PAGE: (context) => NotificationsPage(),

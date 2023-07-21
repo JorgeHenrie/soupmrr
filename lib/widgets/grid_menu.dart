@@ -72,7 +72,7 @@ class SelectCard extends StatelessWidget {
               .pushReplacementNamed(AppRoutes.CONTRACHEQUE_PAGE);
         }
         if (choice.id == 5) {
-          Navigator.of(context).pushReplacementNamed(AppRoutes.PLANODEFERIAS);
+          Navigator.of(context).pushReplacementNamed(AppRoutes.FERIASHOME);
         }
         if (choice.id == 6) {
           auth.logout();
