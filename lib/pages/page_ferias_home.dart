@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rhmobile/models/militar.dart';
 import 'package:rhmobile/utils/app_routes.dart';
 import 'package:rhmobile/widgets/drawer_personalizado.dart';
 
@@ -10,6 +11,7 @@ class feriasHome extends StatefulWidget {
 }
 
 class _feriasHomeState extends State<feriasHome> {
+  final Militar militar;
   //List<Efetivacao> efetivacao = [];
 
   String valorEscolhido = "Integral";
@@ -78,7 +80,7 @@ class _feriasHomeState extends State<feriasHome> {
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
                             ),
-                            Text(''),
+                            Text('${militar.postoGraduacao}${militar.quadro}'),
                           ],
                         ),
                       ],
