@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:rhmobile/models/endereco.dart';
 
+import 'package:http/http.dart' as http;
+import 'package:rhmobile/models/efetivacao.dart';
+import 'package:rhmobile/models/endereco.dart';
 import 'package:rhmobile/models/militar.dart';
 import 'package:rhmobile/models/telefone.dart';
 
@@ -138,5 +139,19 @@ class DadosSql {
       print('status code error');
       throw Exception();
     }
+  }
+
+  Future<void> salvarPeriodoFerias(Efetivacao efetivacao) async {
+    final response = await http.post(
+      Uri.parse('$_Url.json'),
+      body: jsonEncode(
+        {
+          "anoBase": efetivacao.anoBase,
+          "dataInicio": efetivacao.dataInicio,
+          "dataFim": efetivacao.dataFim,
+          "tipoConcessao": efetivacao.tipoConcessao,
+        },
+      ),
+    );
   }
 }

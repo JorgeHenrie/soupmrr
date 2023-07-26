@@ -20,6 +20,14 @@ class _PeriodoState extends State<Periodo> {
 
   DateTimeRange? intervaloSelecionado;
 
+  final _formKey = GlobalKey<FormState>();
+  final _formData = Map<String, Object>();
+
+  void _submitForm() {
+    _formKey.currentState?.save();
+    print(_formData.values);
+  }
+
   //método para armazenar data
   Future<void> fetchData(BuildContext context) async {
     DateTimeRange? dataSelecionada = await showDateRangePicker(
@@ -113,15 +121,26 @@ class _PeriodoState extends State<Periodo> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: 117,
-                    height: 22,
-                    child: TextFormField(
-                      controller: dataInicialController,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
+                  Form(
+                    key: _formKey,
+                    child: SizedBox(
+                      width: 117,
+                      height: 22,
+                      child: TextFormField(
+                        controller: dataInicialController,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        onFieldSubmitted: (_) => _submitForm(),
+                        onSaved: (data) => _formData['dataInicio'] = data ?? '',
+                        readOnly: false,
+                        validator: (_data) {
+                          final data = _data ?? '';
+                          if (data.isEmpty) {
+                            return 'Data é obrigatória';
+                          }
+                        },
                       ),
-                      readOnly: true,
                     ),
                   ),
                   const SizedBox(width: 50),
@@ -133,6 +152,8 @@ class _PeriodoState extends State<Periodo> {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
+                      onSaved: (dataFinal) =>
+                          _formData['dataFinal'] = dataFinal ?? '',
                       readOnly: true,
                     ),
                   )

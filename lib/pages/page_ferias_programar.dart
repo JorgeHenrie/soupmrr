@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:quickalert/quickalert.dart';
-import 'package:rhmobile/models/efetivacao.dart';
 import 'package:rhmobile/pages/page_ferias_periodo.dart';
+import 'package:rhmobile/services/dados_sql.dart';
 import 'package:rhmobile/utils/app_routes.dart';
 
 class ProgramarFerias extends StatefulWidget {
@@ -13,8 +13,6 @@ class ProgramarFerias extends StatefulWidget {
 }
 
 class _ProgramarFeriasState extends State<ProgramarFerias> {
-  //lista com dados simulados
-  List<Efetivacao> efetivacao = [];
   late DateTime selectedDay;
   //variável para pegar o ano atual de forma dinâmica
   late int anoAtual;
@@ -68,6 +66,7 @@ class _ProgramarFeriasState extends State<ProgramarFerias> {
   Widget build(BuildContext context) {
     //pegando o ano atual de forma dinâmica
     anoAtual = DateTime.now().year;
+    DadosSql dadosSql = DadosSql();
 
     return Scaffold(
       appBar: AppBar(
@@ -191,6 +190,7 @@ class _ProgramarFeriasState extends State<ProgramarFerias> {
                     actions: [
                       TextButton(
                           onPressed: () {
+                            //dadosSql.salvarPeriodoFerias(efetivacao);
                             _showSucessAlert();
                           },
                           child: Text(
