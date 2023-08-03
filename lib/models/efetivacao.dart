@@ -1,11 +1,12 @@
 import 'package:rhmobile/models/militar.dart';
 
-enum status {
+enum Status {
+  aprovada,
   solicitada,
   naoSolicitada,
 }
 
-enum tipoConcessao {
+enum TipoConcessao {
   integral,
   parcelada,
 }
@@ -19,7 +20,7 @@ class Efetivacao {
   DateTime dataFim;
   final bool autorizacao;
   final String parcela;
-  final Enum status;
+  final Status status;
   Enum tipoConcessao;
   //ANEXO DO ACRÉSCIMO
 
@@ -32,7 +33,7 @@ class Efetivacao {
     required this.dataFim,
     required this.autorizacao,
     required this.parcela,
-    required this.status,
+    this.status = Status.naoSolicitada,
     required this.tipoConcessao,
   });
 
@@ -49,4 +50,5 @@ class Efetivacao {
   //     status: status,
   //     tipoConcessao: tipoConcessao,
   //   );
+  //Essa é a classe model, que possui um atributo chamado status, que deverá ter três opções: não solicitada, solicitada, aprovada.
 }

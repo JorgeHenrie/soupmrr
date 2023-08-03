@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rhmobile/models/auth_model.dart';
+import 'package:rhmobile/models/efetivacao.dart';
 import 'package:rhmobile/models/militar.dart';
 import 'package:rhmobile/services/dados_sql.dart';
 import 'package:rhmobile/utils/app_routes.dart';
@@ -23,6 +24,7 @@ class _feriasHomeState extends State<feriasHome> {
     DadosSql dadosSql = DadosSql();
 
     late Militar? militar;
+    Efetivacao? efetivacao;
 
     Future<Militar?> _buscarDadosSql() async {
       militar = await dadosSql.buscarMilitarBancoByMatricula(auth.matricula!);
@@ -124,7 +126,8 @@ class _feriasHomeState extends State<feriasHome> {
                                     color:
                                         const Color.fromARGB(255, 218, 44, 32),
                                   ),
-                                  child: const Text(
+                                  child: Text(
+                                    //efetivacao?.status ?? '',
                                     'Não solicitada',
                                     style: TextStyle(color: Colors.white),
                                     textAlign: TextAlign.center,

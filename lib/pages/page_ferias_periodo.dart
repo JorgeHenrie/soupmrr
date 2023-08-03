@@ -17,50 +17,84 @@ class _PeriodoState extends State<Periodo> {
   //Armazenando a data inicial
   TextEditingController dataInicialController = TextEditingController();
   TextEditingController dataFinalController = TextEditingController();
+  DateTime? _dataInicialSelecionada;
+  DateTime? _dataFinalSelecionada;
 
-  DateTimeRange? intervaloSelecionado;
-
-  final _formKey = GlobalKey<FormState>();
-  final _formData = Map<String, Object>();
-
-  void _submitForm() {
-    _formKey.currentState?.save();
-    print(_formData.values);
+  _showDatePickerInicial() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime(2023),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2024),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      } else {
+        setState(() {
+          _dataInicialSelecionada = pickedDate;
+        });
+        dataInicialController.text =
+            DateFormat('dd/MM/yyyy').format(_dataInicialSelecionada!);
+        print(dataInicialController);
+      }
+    });
   }
 
-  //método para armazenar data
-  Future<void> fetchData(BuildContext context) async {
-    DateTimeRange? dataSelecionada = await showDateRangePicker(
+  _showDatePickerFinal() {
+    showDatePicker(
       context: context,
-      firstDate: DateTime(2024),
-      lastDate: DateTime(2025),
-    );
-
-    if (dataSelecionada != null) {
-      intervaloSelecionado = dataSelecionada;
-      if (intervaloSelecionado != null) {
+      initialDate: DateTime(2023),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2024),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      } else {
+        setState(() {
+          _dataFinalSelecionada = pickedDate;
+        });
         dataInicialController.text =
-            DateFormat('dd/MM/yyyy').format(intervaloSelecionado!.start);
-        print(dataInicialController);
-
-        dataFinalController.text =
-            DateFormat('dd/MM/yyyy').format(intervaloSelecionado!.end);
+            DateFormat('dd/MM/yyyy').format(_dataFinalSelecionada!);
         print(dataFinalController);
       }
-    }
+    });
   }
 
-  @override
-  void dispose() {
-    dataInicialController.dispose();
-    dataFinalController.dispose();
-    super.dispose();
-  }
+  // DateTime? _dataSelecionada = DateTime.now();
+
+  // DateTimeRange? intervaloSelecionado;
+  // DateTimeRange? intervaloSelecionado;
+
+  //método para armazenar data
+  // Future<void> fetchData(BuildContext context) async {
+  //   DateTimeRange? dataSelecionada = await showDateRangePicker(
+  //     context: context,
+  //     firstDate: DateTime(2024),
+  //     lastDate: DateTime(2025),
+  //   );
+
+  //   if (dataSelecionada != null) {
+  //     intervaloSelecionado = dataSelecionada;
+  //     if (intervaloSelecionado != null) {
+  //       dataInicialController.text =
+  //           DateFormat('dd/MM/yyyy').format(intervaloSelecionado!.start);
+  //       print(dataInicialController);
+
+  //       dataFinalController.text =
+  //           DateFormat('dd/MM/yyyy').format(intervaloSelecionado!.end);
+  //       print(dataFinalController);
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    dataInicialController.text = '';
-    dataFinalController.text = '';
+    dataInicialController.text = _dataInicialSelecionada != null
+        ? DateFormat('dd/MM/yyyy').format(_dataInicialSelecionada!)
+        : '';
+    dataFinalController.text = _dataFinalSelecionada != null
+        ? DateFormat('dd/MM/yyyy').format(_dataFinalSelecionada!)
+        : '';
 
     return Column(
       children: [
@@ -98,7 +132,8 @@ class _PeriodoState extends State<Periodo> {
                   const Text('Data de início'),
                   IconButton(
                     onPressed: () {
-                      fetchData(context);
+                      print('calendar date picker');
+                      _showDatePickerInicial();
                     },
                     icon: const Icon(
                       Icons.calendar_month_outlined,
@@ -109,7 +144,8 @@ class _PeriodoState extends State<Periodo> {
                   const Text('Data Final'),
                   IconButton(
                     onPressed: () {
-                      fetchData(context);
+                      print('calendar date picker');
+                      _showDatePickerFinal();
                     },
                     icon: const Icon(
                       Icons.calendar_month_outlined,
@@ -122,7 +158,6 @@ class _PeriodoState extends State<Periodo> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Form(
-                    key: _formKey,
                     child: SizedBox(
                       width: 117,
                       height: 22,
@@ -131,15 +166,6 @@ class _PeriodoState extends State<Periodo> {
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                         ),
-                        onFieldSubmitted: (_) => _submitForm(),
-                        onSaved: (data) => _formData['dataInicio'] = data ?? '',
-                        readOnly: false,
-                        validator: (_data) {
-                          final data = _data ?? '';
-                          if (data.isEmpty) {
-                            return 'Data é obrigatória';
-                          }
-                        },
                       ),
                     ),
                   ),
@@ -152,9 +178,6 @@ class _PeriodoState extends State<Periodo> {
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                       ),
-                      onSaved: (dataFinal) =>
-                          _formData['dataFinal'] = dataFinal ?? '',
-                      readOnly: true,
                     ),
                   )
                 ],
